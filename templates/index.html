@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Job Application Tracker</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Job Application Tracker</h1>
+
+    <form action="/add" method="POST" class="job-form">
+      <input type="text" name="company" placeholder="Company" required>
+      <input type="text" name="role" placeholder="Role" required>
+      <select name="status" required>
+        <option value="">Select Status</option>
+        <option value="Applied">Applied</option>
+        <option value="Interviewing">Interviewing</option>
+        <option value="Rejected">Rejected</option>
+        <option value="Offer">Offer</option>
+      </select>
+      <input type="date" name="date" required>
+      <button type="submit">Add Job</button>
+    </form>
+
+    <h2>My Applications</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Company</th>
+          <th>Role</th>
+          <th>Status</th>
+          <th>Date Applied</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for job in jobs %}
+        <tr>
+          <td>{{ job[1] }}</td>
+          <td>{{ job[2] }}</td>
+          <td><span class="status {{ job[3]|lower }}">{{ job[3] }}</span>
+            </td>
+          <td>{{ job[4] }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</body>
+</html>
